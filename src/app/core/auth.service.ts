@@ -16,7 +16,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut();
-    this.router.navigate([""]);
+    this.router.navigate(["auth"]);
   }
 
   isLoggedIn() {
@@ -48,7 +48,6 @@ export class AuthService {
     const token = await user.getIdTokenResult();
 
     this.router.navigate([`/profile/${user.uid}`]);
-    console.log("router works!");
     // if (token.claims.admin) {
     //   this.router.navigate(["/users"]);
     // } else {

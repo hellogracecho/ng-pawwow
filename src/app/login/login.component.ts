@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
           email,
           password
         );
+        form.reset();
       }
 
       this.auth.routeOnLogin();
