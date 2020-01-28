@@ -1,44 +1,27 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform } from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+
+import { PageInfoDataService } from "./page-info-data.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"]
 })
 export class AppComponent {
-  public appPages = [
-    {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'About',
-      url: '/about',
-      icon: 'happy'
-    },
-    {
-      title: 'Our Staff',
-      url: '/staff',
-      icon: 'people'
-    },
-    {
-      title: 'Our Services',
-      url: '/services',
-      icon: 'leaf'
-    }
-  ];
+  public appPages = [];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private pageInfoData: PageInfoDataService
   ) {
     this.initializeApp();
+    this.appPages = this.pageInfoData.pages;
   }
 
   initializeApp() {

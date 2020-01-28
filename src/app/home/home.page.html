@@ -11,38 +11,28 @@
 
 <ion-content>
   <ion-card class="welcome-card">
-    <img src="/assets/shapes.svg" alt=""/>
+    <img src="/assets/cat-and-dog.jpg" alt="Human and Dog" />
     <ion-card-header>
-      <ion-card-subtitle>Get Started</ion-card-subtitle>
-      <ion-card-title>Welcome to Ionic</ion-card-title>
+      <ion-card-subtitle
+        >A Friendly Pet Store For Dogs And Cats</ion-card-subtitle
+      >
+      <ion-card-title>Welcome to Pawwow</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>
-        Now that your app has been created, you'll want to start building out features
-        and components. Check out some of the resources below for next steps.
-      </p>
+      PAW WOW was established in 2013 by Grace Cho in Vancouver. We value our
+      clients and their pet with trustworthy, reliable, and sustainable
+      services. Our staffs are certified experts specialized in cats and dogs.
+      Come visit our store for free consulting on training.
     </ion-card-content>
   </ion-card>
 
   <ion-list lines="none">
     <ion-list-header>
-      <ion-label>Resources</ion-label>
+      <ion-label>Read more</ion-label>
     </ion-list-header>
-    <ion-item href="https://ionicframework.com/docs/">
-      <ion-icon slot="start" color="medium" name="book"></ion-icon>
-      <ion-label>Ionic Documentation</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-      <ion-icon slot="start" color="medium" name="build"></ion-icon>
-      <ion-label>Scaffold Out Your App</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/layout/structure">
-      <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-      <ion-label>Change Your App Layout</ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/theming/basics">
-      <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-      <ion-label>Theme Your App</ion-label>
+    <ion-item *ngFor="let page of pages" routerLink="{{ page.url }}">
+      <ion-icon slot="start" name="{{ page.icon }}"></ion-icon>
+      <ion-label>{{ page.title }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
