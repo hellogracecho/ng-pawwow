@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title color="primary">
       Home
     </ion-title>
   </ion-toolbar>
@@ -16,7 +16,7 @@
       <ion-card-subtitle
         >A Friendly Pet Store For Dogs And Cats</ion-card-subtitle
       >
-      <ion-card-title>Welcome to Pawwow</ion-card-title>
+      <ion-card-title color="primary">Welcome to Pawwow</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       PAW WOW was established in 2013 by Grace Cho in Vancouver. We value our
@@ -31,7 +31,7 @@
       <ion-label>Read more</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let page of pages" routerLink="{{ page.url }}">
-      <ion-icon slot="start" name="{{ page.icon }}"></ion-icon>
+      <ion-icon color="primary" slot="start" name="{{ page.icon }}"></ion-icon>
       <ion-label>{{ page.title }}</ion-label>
     </ion-item>
   </ion-list>
