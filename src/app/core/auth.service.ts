@@ -14,6 +14,10 @@ export class AuthService {
     private afs: AngularFirestore
   ) {}
 
+  login() {
+    this.router.navigate(["auth"]);
+  }
+
   logout() {
     this.afAuth.auth.signOut();
     this.router.navigate(["auth"]);
@@ -47,6 +51,7 @@ export class AuthService {
     const user = this.afAuth.auth.currentUser;
     const token = await user.getIdTokenResult();
 
+    // Go to profile page
     this.router.navigate([`/profile/${user.uid}`]);
     // if (token.claims.admin) {
     //   this.router.navigate(["/users"]);
