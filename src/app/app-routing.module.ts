@@ -3,8 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "home", pathMatch: "full" },
   {
-    path: "",
+    path: "auth",
     component: LoginComponent
   },
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: "services",
     loadChildren: () =>
       import("./services/services.module").then(m => m.ServicesPageModule)
+  },
+  {
+    path: "profile/:id",
+    loadChildren: () =>
+      import("./profile/profile.module").then(m => m.ProfilePageModule)
   }
 ];
 
