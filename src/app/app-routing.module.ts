@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { LoginComponent } from "./login/login.component";
 
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "home",
-    pathMatch: "full"
+    component: LoginComponent
   },
   {
     path: "home",
@@ -17,12 +17,14 @@ const routes: Routes = [
       import("./about/about.module").then(m => m.AboutPageModule)
   },
   {
-    path: 'staff',
-    loadChildren: () => import('./staff/staff.module').then( m => m.StaffPageModule)
+    path: "staff",
+    loadChildren: () =>
+      import("./staff/staff.module").then(m => m.StaffPageModule)
   },
   {
-    path: 'services',
-    loadChildren: () => import('./services/services.module').then( m => m.ServicesPageModule)
+    path: "services",
+    loadChildren: () =>
+      import("./services/services.module").then(m => m.ServicesPageModule)
   }
 ];
 
