@@ -12,7 +12,7 @@ import { AuthService } from "../core/auth.service";
 export class LoginComponent implements OnInit {
   loading = false;
   error: string;
-  action: "login" | "signup" = "login";
+  action: "login" | "register" = "login";
 
   constructor(
     private auth: AuthService,
@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
         );
       }
 
-      const uid = resp.user.uid;
       this.auth.routeOnLogin();
     } catch (error) {
       console.log(error.message);
@@ -64,6 +63,6 @@ export class LoginComponent implements OnInit {
   }
 
   get isSignUp() {
-    return this.action === "signup";
+    return this.action === "register";
   }
 }
