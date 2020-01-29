@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+
+import { AngularFireAuth } from "@angular/fire/auth";
+
 import { PageInfoDataService } from "../core/page-info-data.service";
 import { AuthService } from "../core/auth.service";
 
@@ -12,7 +15,8 @@ export class HomePage {
 
   constructor(
     private pageInfoData: PageInfoDataService,
-    private auth: AuthService
+    private auth: AuthService,
+    private afAuth: AngularFireAuth
   ) {
     this.pages = this.pageInfoData.pages.slice(1);
   }

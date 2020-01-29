@@ -3,10 +3,9 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title text-center>
       Home
     </ion-title>
-    <!-- TODO: Set this log-in-out button as a seperate module.. shared module? -->
     <ion-buttons slot="primary" *ngIf="auth.isLoggedIn()">
       <ion-button (click)="onProfile()">
         <ion-icon name="person" slot="icon-only"></ion-icon>

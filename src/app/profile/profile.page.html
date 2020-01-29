@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title text-center>
       Profile
     </ion-title>
     <ion-buttons slot="primary" *ngIf="auth.isLoggedIn()">
@@ -28,14 +28,130 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="12" size-sm="8" offset-sm="2">
-        <ion-item lines="none">
-          <ion-text color="primary">
-            <h1>test</h1>
-          </ion-text>
-        </ion-item>
-      </ion-col>
-    </ion-row>
   </ion-grid>
+  <div *ngIf="item | async as userProfile">
+    <form #profileForm="ngForm" (submit)="onSubmit(profileForm)">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-sm="6" offset-sm="3">
+            <ion-label>Your profile</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-sm="6" offset-sm="3">
+            <ion-text class="error" *ngIf="error">
+              {{ error }}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-sm="6" offset-sm="3">
+            <ion-item>
+              <ion-label color="primary" position="stacked">Name</ion-label>
+              <ion-input
+                type="text"
+                name="name"
+                required
+                [ngModel]="userProfile.name"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="stacked">Email</ion-label>
+              <ion-input
+                type="text"
+                name="email"
+                required
+                [ngModel]="userProfile.email"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="floating">Phone</ion-label>
+              <ion-input
+                type="text"
+                name="phone"
+                required
+                [ngModel]="userProfile.phone"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="floating">Address</ion-label>
+              <ion-input
+                name="address"
+                [ngModel]="userProfile.address"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="floating">City</ion-label>
+              <ion-input name="city" [ngModel]="userProfile.city"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="floating"
+                >Province</ion-label
+              >
+              <ion-select placeholder="Select Province">
+                <ion-select-option value="on">Ontario</ion-select-option>
+                <ion-select-option value="QC">Quebec</ion-select-option>
+                <ion-select-option value="NS">Nova Scotia</ion-select-option>
+                <ion-select-option value="NB">New Brunswick</ion-select-option>
+                <ion-select-option value="MB">Manitoba</ion-select-option>
+                <ion-select-option value="BC"
+                  >British Columbia</ion-select-option
+                >
+                <ion-select-option value="PE"
+                  >Prince Edward Island</ion-select-option
+                >
+                <ion-select-option value="SK">Saskatchewan</ion-select-option>
+                <ion-select-option value="AB">Alberta</ion-select-option>
+                <ion-select-option value="NL"
+                  >Newfoundland and Labrador</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="floating"
+                >Zip Code</ion-label
+              >
+              <ion-input name="zip" [ngModel]="userProfile.zip"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label color="primary" position="floating"
+                >Pet Name</ion-label
+              >
+              <ion-input
+                name="petName"
+                [ngModel]="userProfile.petName"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="floating">Pet Age</ion-label>
+              <ion-input
+                type="number"
+                name="petAge"
+                [ngModel]="userProfile.petAge"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="floating"
+                >Pet Description</ion-label
+              >
+              <ion-textarea
+                type="textarea"
+                rows="3"
+                name="petDescription"
+                [ngModel]="userProfile.petDescription"
+              ></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-sm="6" offset-sm="3">
+            <ion-button type="submit" color="primary" expand="block">
+              Update
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
 </ion-content>

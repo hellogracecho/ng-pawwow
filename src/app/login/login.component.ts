@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
       form.reset();
       this.auth.routeOnLogin();
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       this.error = error.message;
     }
   }
