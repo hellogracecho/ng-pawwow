@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { UserProfile } from "./user-profile.model";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { UserProfile } from "./user-profile.model";
 
 @Injectable({
   providedIn: "root"
@@ -36,7 +36,14 @@ export class AuthService {
       uid: user.uid,
       name: user.displayName,
       email: user.email,
-      phone: ""
+      phone: "",
+      address: "",
+      city: "",
+      province: "",
+      zip: "",
+      petName: "",
+      petAge: null,
+      petDescription: ""
     };
 
     // write to Cloud Firestore

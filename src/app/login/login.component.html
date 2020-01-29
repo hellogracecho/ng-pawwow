@@ -1,16 +1,16 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title color="primary">
+      <ion-title>
         Welcome to Pawwow
       </ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content padding>
-    <form #form="ngForm" (submit)="onSubmit(form)" [class.loading]="loading">
+    <form #form="ngForm" (submit)="onSubmit(form)" >
       <ion-grid>
         <ion-row>
           <ion-col size-sm="6" offset-sm="3">
