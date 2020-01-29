@@ -42,6 +42,12 @@ const routes: Routes = [
     data: { authGuardPipe: redirectLoggedInToProfile }
   },
   {
+    path: "profile",
+    component: LoginComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: onlyAllowSelf }
+  },
+  {
     path: "profile/:id",
     loadChildren: () =>
       import("./profile/profile.module").then(m => m.ProfilePageModule),
