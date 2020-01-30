@@ -12,6 +12,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AuthService } from "../core/auth.service";
 import { UserProfile } from "../core/user-profile.model";
 import { Observable } from "rxjs";
+import { LoadingController } from "@ionic/angular";
 
 @Component({
   selector: "app-profile",
@@ -24,13 +25,18 @@ export class ProfilePage implements OnInit {
   item: Observable<UserProfile>;
   uid: string;
 
+  // TODO: FormControl, Validator
+  // https://www.joshmorony.com/advanced-forms-validation-in-ionic-2/
+
   error: string;
+  isLoading = false;
 
   constructor(
     public afAuth: AngularFireAuth,
     private auth: AuthService,
     private afs: AngularFirestore,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loadingCtrl: LoadingController
   ) {
     this.uid = this.route.snapshot.paramMap.get("id");
 
@@ -49,8 +55,12 @@ export class ProfilePage implements OnInit {
   }
 
   async onSubmit(ngForm: NgForm) {
+    this.error = null;
+    this.isLoading = true;
+
     const {
-      name,
+      firstName,
+      lastName,
       email,
       phone,
       address,
@@ -64,7 +74,8 @@ export class ProfilePage implements OnInit {
 
     const userProfile: UserProfile = {
       uid: this.uid,
-      name,
+      firstName,
+      lastName,
       email,
       phone,
       address,
@@ -77,6 +88,25 @@ export class ProfilePage implements OnInit {
     };
 
     try {
+      if (!ngForm.valid) {
+        return;
+        console.log("form is invalid");
+      }
+      this.loadingCtrl
+        .create({
+          keyboardClose: true,
+          message: "Updating your profile.",
+          spinner: "circles"
+        })
+        .then(loadingEl => {
+          loadingEl.present();
+          // Add Loader
+          setTimeout(() => {
+            this.isLoading = false;
+            loadingEl.dismiss();
+            // this.auth.routeOnLogin();
+          }, 1000);
+        });
       await this.auth.updateUserDocument(userProfile);
     } catch (error) {
       console.log(error.message);

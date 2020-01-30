@@ -18,12 +18,15 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2">
-        <ion-card *ngIf="afAuth.user | async as user">
+        <ion-card *ngIf="item | async as userProfile">
           <img src="/assets/human-and-dog.jpg" alt="Human and Dog" />
           <ion-card-header>
             <ion-card-title color="primary"
-              >Hey, {{ user.displayName }}</ion-card-title
-            >
+              >Hey, {{ userProfile.firstName }}
+              <span *ngIf="userProfile.petName">
+                and {{ userProfile.petName }}
+              </span>
+            </ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-col>
@@ -34,11 +37,6 @@
       <ion-grid>
         <ion-row>
           <ion-col size-sm="6" offset-sm="3">
-            <ion-label>Your profile</ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size-sm="6" offset-sm="3">
             <ion-text class="error" *ngIf="error">
               {{ error }}
             </ion-text>
@@ -47,12 +45,27 @@
         <ion-row>
           <ion-col size-sm="6" offset-sm="3">
             <ion-item>
-              <ion-label color="primary" position="stacked">Name</ion-label>
+              <ion-label color="primary" position="stacked"
+                >First Name</ion-label
+              >
               <ion-input
                 type="text"
-                name="name"
+                name="firstName"
+                inputmode="text"
                 required
-                [ngModel]="userProfile.name"
+                [ngModel]="userProfile.firstName"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" position="stacked"
+                >Last Name</ion-label
+              >
+              <ion-input
+                type="text"
+                name="lastName"
+                inputmode="text"
+                required
+                [ngModel]="userProfile.lastName"
               ></ion-input>
             </ion-item>
             <ion-item>
@@ -60,6 +73,7 @@
               <ion-input
                 type="text"
                 name="email"
+                inputmode="email"
                 required
                 [ngModel]="userProfile.email"
               ></ion-input>
@@ -67,9 +81,9 @@
             <ion-item>
               <ion-label color="primary" position="floating">Phone</ion-label>
               <ion-input
-                type="text"
+                type="tel"
+                pattern="("
                 name="phone"
-                required
                 [ngModel]="userProfile.phone"
               ></ion-input>
             </ion-item>
@@ -88,7 +102,11 @@
               <ion-label color="primary" position="floating"
                 >Province</ion-label
               >
-              <ion-select placeholder="Select Province">
+              <ion-select
+                name="province"
+                [ngModel]="userProfile.province"
+                placeholder="Select Province"
+              >
                 <ion-select-option value="on">Ontario</ion-select-option>
                 <ion-select-option value="QC">Quebec</ion-select-option>
                 <ion-select-option value="NS">Nova Scotia</ion-select-option>
@@ -111,7 +129,11 @@
               <ion-label color="primary" position="floating"
                 >Zip Code</ion-label
               >
-              <ion-input name="zip" [ngModel]="userProfile.zip"></ion-input>
+              <ion-input
+                inputmode="text"
+                name="zip"
+                [ngModel]="userProfile.zip"
+              ></ion-input>
             </ion-item>
 
             <ion-item>
@@ -119,6 +141,7 @@
                 >Pet Name</ion-label
               >
               <ion-input
+                inputmode="text"
                 name="petName"
                 [ngModel]="userProfile.petName"
               ></ion-input>
@@ -126,6 +149,7 @@
             <ion-item>
               <ion-label color="primary" position="floating">Pet Age</ion-label>
               <ion-input
+                inputmode="numeric"
                 type="number"
                 name="petAge"
                 [ngModel]="userProfile.petAge"
@@ -138,6 +162,8 @@
               <ion-textarea
                 type="textarea"
                 rows="3"
+                maxlength="300"
+                inputmode="text"
                 name="petDescription"
                 [ngModel]="userProfile.petDescription"
               ></ion-textarea>
