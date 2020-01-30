@@ -34,7 +34,8 @@ export class AuthService {
     // create the object with new data
     const userProfile: UserProfile = {
       uid: user.uid,
-      name: user.displayName,
+      firstName: user.displayName.split(" ")[0],
+      lastName: user.displayName.split(" ")[1],
       email: user.email,
       phone: "",
       address: "",
