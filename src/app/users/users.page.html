@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title text-center>Admin Page - Users</ion-title>
+    <ion-buttons slot="primary" *ngIf="auth.isLoggedIn()">
+      <ion-button (click)="logout()">
+        <ion-icon name="exit" slot="start"></ion-icon>Logout
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Pet Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users | async">
+        <td>
+          <a [routerLink]="['/profile', user.uid]">
+            {{ user.firstName }} {{ user.lastName }}
+          </a>
+        </td>
+        <td>{{ user.petName }}</td>
+        <td>{{ user.phone }}</td>
+        <td>
+          {{ user.address }} {{ user.city }} {{ user.province }}, {{ user.zip }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

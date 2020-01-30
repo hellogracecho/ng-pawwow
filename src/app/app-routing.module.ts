@@ -3,8 +3,10 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
 import {
   AngularFireAuthGuard,
-  redirectUnauthorizedTo
+  redirectUnauthorizedTo,
+  customClaims
 } from "@angular/fire/auth-guard";
+import { pipe } from "rxjs";
 import { map } from "rxjs/operators";
 
 // Custom Pipes
@@ -13,6 +15,44 @@ const redirectLoggedInToProfile = () =>
   map(user => (user ? ["profile", (user as any).uid] : true));
 const onlyAllowSelf = next =>
   map(user => (!!user && next.params.id == (user as any).uid) || ["auth"]);
+
+const adminOnly = () =>
+  pipe(
+    customClaims,
+    map(claims => claims.admin === true || [""])
+  );
+
+const redirectLoggedInToProfileOrUsers = () =>
+  pipe(
+    customClaims,
+    map(claims => {
+      // if no claims, then there is no authenticated user
+      // so alow the route ['']
+      if (claims.length === 0) {
+        return true;
+      }
+
+      // if a custom claim set, then redirect to ['users']
+      if (claims.admin) {
+        return ["users"];
+      }
+
+      // otherwise, redirect user's profile page
+      return ["profile", claims.user_id];
+    })
+  );
+
+const allowOnlySelfOrAdmin = next =>
+  pipe(
+    customClaims,
+    map(claims => {
+      if ((claims.length = 0)) {
+        return [""];
+      }
+
+      return next.params.id === claims.user_id || claims.admin;
+    })
+  );
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -39,20 +79,27 @@ const routes: Routes = [
     path: "auth",
     component: LoginComponent,
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToProfile }
+    data: { authGuardPipe: redirectLoggedInToProfileOrUsers }
   },
   {
     path: "profile",
     component: LoginComponent,
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: onlyAllowSelf }
+    data: { authGuardPipe: redirectLoggedInToProfileOrUsers }
   },
   {
     path: "profile/:id",
     loadChildren: () =>
       import("./profile/profile.module").then(m => m.ProfilePageModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: onlyAllowSelf }
+    data: { authGuardPipe: allowOnlySelfOrAdmin }
+  },
+  {
+    path: "users",
+    loadChildren: () =>
+      import("./users/users.module").then(m => m.UsersPageModule),
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly }
   }
 ];
 

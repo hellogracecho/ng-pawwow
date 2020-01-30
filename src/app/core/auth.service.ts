@@ -61,10 +61,10 @@ export class AuthService {
 
     // Go to profile page
     this.router.navigate([`/profile/${user.uid}`]);
-    // if (token.claims.admin) {
-    //   this.router.navigate(["/users"]);
-    // } else {
-    //   this.router.navigate([`/profile/${user.uid}`]);
-    // }
+    if (token.claims.admin) {
+      this.router.navigate(["/users"]);
+    } else {
+      this.router.navigate([`/profile/${user.uid}`]);
+    }
   }
 }
