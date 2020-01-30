@@ -35,9 +35,9 @@
   <div *ngIf="item | async as userProfile">
     <form #profileForm="ngForm" (submit)="onSubmit(profileForm)">
       <ion-grid>
-        <ion-row>
+        <ion-row *ngIf="error">
           <ion-col size-sm="6" offset-sm="3">
-            <ion-text class="error" *ngIf="error">
+            <ion-text class="error">
               {{ error }}
             </ion-text>
           </ion-col>

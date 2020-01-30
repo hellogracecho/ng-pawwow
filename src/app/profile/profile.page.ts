@@ -88,27 +88,30 @@ export class ProfilePage implements OnInit {
     };
 
     try {
-      if (!ngForm.valid) {
+      if (ngForm.valid) {
+        this.loadingCtrl
+          .create({
+            keyboardClose: true,
+            message: "Updating your profile.",
+            spinner: "circles"
+          })
+          .then(loadingEl => {
+            loadingEl.present();
+            // Add Loader
+            setTimeout(() => {
+              this.isLoading = false;
+              loadingEl.dismiss();
+              // this.auth.routeOnLogin();
+            }, 1000);
+          });
+      } else {
+        console.log("invalid form");
         return;
-        console.log("form is invalid");
       }
-      this.loadingCtrl
-        .create({
-          keyboardClose: true,
-          message: "Updating your profile.",
-          spinner: "circles"
-        })
-        .then(loadingEl => {
-          loadingEl.present();
-          // Add Loader
-          setTimeout(() => {
-            this.isLoading = false;
-            loadingEl.dismiss();
-            // this.auth.routeOnLogin();
-          }, 1000);
-        });
       await this.auth.updateUserDocument(userProfile);
     } catch (error) {
+      // TODO: this catch error not working..
+      console.log("invalid form");
       console.log(error.message);
       this.error = error.message;
     }

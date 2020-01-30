@@ -12,9 +12,9 @@
   <ion-content padding>
     <form #form="ngForm" (submit)="onSubmit(form)">
       <ion-grid>
-        <ion-row>
+        <ion-row *ngIf="error">
           <ion-col size-sm="6" offset-sm="3">
-            <ion-text class="error" *ngIf="error">
+            <ion-text class="error">
               {{ error }}
             </ion-text>
           </ion-col>
