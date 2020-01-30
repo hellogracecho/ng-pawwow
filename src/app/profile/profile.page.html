@@ -27,19 +27,23 @@
             </ion-col>
           </ion-row>
           <div *ngIf="downloadURL | async; let srcUrl">
-            <!-- <i-progress-bar value="0.9" ></i-progress-bar> -->
             <img
               [src]="srcUrl"
               alt="profile image of {{ userProfile.firstName}}"
             />
           </div>
           <div *ngIf="!(downloadURL | async)">
-            <!-- <i-progress-bar value="0.9" ></i-progress-bar> -->
             <img
               src="/assets/human-and-dog.jpg"
               alt="Placeholder Human and Dog"
             />
           </div>
+          <span *ngIf="(uploadProgress | async)/100 ; let uploadValue">
+            <ion-progress-bar
+              *ngIf="! (uploadValue === 1 || uploadValue ===0)"
+              [value]="uploadValue"
+            ></ion-progress-bar>
+          </span>
           <ion-card-header>
             <ion-card-title color="secondary"
               >Hey, {{ userProfile.firstName }}
