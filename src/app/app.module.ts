@@ -16,6 +16,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireAuthGuard } from "@angular/fire/auth-guard";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireStorageModule } from "@angular/fire/storage";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -27,7 +28,8 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   providers: [
     StatusBar,
