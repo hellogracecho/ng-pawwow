@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
     private loadingCtrl: LoadingController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.action = "login";
+  }
 
   async onSubmit(form: NgForm) {
     this.error = null;

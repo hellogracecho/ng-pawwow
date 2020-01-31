@@ -56,7 +56,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.itemDoc = this.afs.doc<UserProfile>(`users/${this.uid}`);
     this.item = this.itemDoc.valueChanges();
-    }
+  }
 
   logout() {
     this.auth.logout();
@@ -144,7 +144,6 @@ export class ProfilePage implements OnInit {
 
     // observer percentage changes
     this.uploadProgress = task.percentageChanges();
-    console.log(`hello`, this.uploadProgress);
 
     // get notified when the download URL is avaialbe
     task

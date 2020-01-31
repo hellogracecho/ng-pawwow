@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title text-center>Admin Page - Users</ion-title>
+    <ion-title text-center>Admin</ion-title>
     <ion-buttons slot="primary" *ngIf="auth.isLoggedIn()">
       <ion-button (click)="logout()">
         <ion-icon name="exit" slot="start"></ion-icon>Logout
@@ -12,29 +12,47 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Pet Name</th>
-        <th>Phone</th>
-        <th>Address</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users | async">
-        <td>
-          <a [routerLink]="['/profile', user.uid]">
-            {{ user.firstName }} {{ user.lastName }}
-          </a>
-        </td>
-        <td>{{ user.petName }}</td>
-        <td>{{ user.phone }}</td>
-        <td>
-          {{ user.address }} {{ user.city }} {{ user.province }}, {{ user.zip }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <ion-list lines="none">
+          <ion-list-header>
+            <ion-label>List of Users</ion-label>
+          </ion-list-header>
+
+          <div *ngIf="isLoading" text-center>
+            <ion-spinner color="primary">Loading users list...</ion-spinner>
+          </div>
+
+          <div *ngIf="!isLoading && !isUser">
+            <ion-text class="error">Oops, there is no user.</ion-text>
+          </div>
+
+          <ng-container *ngFor="let user of users | async">
+            <ng-container *ngIf="!isLoading && isUser">
+              <ion-item [routerLink]="['/profile', user.uid]">
+                <ion-icon color="primary" slot="start" name="person"></ion-icon>
+                <ion-label>
+                  {{ user.firstName }}
+                  <span *ngIf="user.petName"> and {{ user.petName }}</span>
+                </ion-label>
+              </ion-item>
+            </ng-container>
+          </ng-container>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-item-sliding *ngFor="let user of users | async" #slidingItem>
+            <ion-item-options side="end">
+              <ion-item-option
+                color="secondary"
+                (click)="onEdit(offer.id, slidingItem)"
+              >
+                <ion-icon name="create" slot="icon-only"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding> -->
+  </ion-grid>
 </ion-content>
