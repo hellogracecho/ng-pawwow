@@ -3,18 +3,48 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title text-center>about</ion-title>
+    <ion-title text-center>ABOUT US</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-text>
-    <h1 color="primary">About Us</h1>
-    <p>
-      PAW WOW was established in 2013 by Grace Cho in Vancouver. We value our
-      clients and their pet with trustworthy, reliable, and sustainable
-      services. Our staffs are certified experts specialized in cats and dogs.
-      Come visit our store for free consulting on training.
-    </p>
-  </ion-text>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3" no-padding>
+        <ion-list lines="none">
+          <ion-list-header>
+            <ion-label>Who We Are</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-text>
+              PAW WOW was established in 2013 by Grace Cho in Vancouver. We
+              value our clients and their pet with trustworthy, reliable, and
+              sustainable services. Our staffs are certified experts specialized
+              in cats and dogs. Come visit our store for free consulting on
+              training.
+            </ion-text>
+          </ion-item>
+        </ion-list>
+
+        <!-- Google Maps -->
+        <ion-list lines="none">
+          <ion-list-header>
+            <ion-label>Where We Are Located</ion-label>
+          </ion-list-header>
+          <ion-img
+            role="button"
+            class="location-img"
+            (click)="onShowFullMap()"
+            [src]="selectedLocationImage"
+          ></ion-img>
+          <ion-item>
+            <ion-text>
+              <p>151 East Hastings</p>
+              <p>Vancouver, BC</p>
+            </ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "angular-ionic-pawwow.appspot.com",
     messagingSenderId: "927511709286",
     appId: "1:927511709286:web:89aefb5c1e63bd6f210fa7"
-  }
+  },
+  googleMapsAPIKey: "AIzaSyByunhQ2Uz6TIiSII8jzhmkWuUkTN40qwk"
 };
 
 /*
