@@ -18,7 +18,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2">
-        <ion-card *ngIf="item | async as userProfile">
+        <ion-card class="profile-card" *ngIf="item | async as userProfile">
           <ion-row *ngIf="error">
             <ion-col size-sm="6" offset-sm="3">
               <ion-text class="error">
@@ -26,13 +26,16 @@
               </ion-text>
             </ion-col>
           </ion-row>
-          <div *ngIf="downloadURL | async; let srcUrl">
+          <div
+            
+            *ngIf="downloadURL | async; let srcUrl"
+          >
             <img
               [src]="srcUrl"
               alt="profile image of {{ userProfile.firstName}}"
             />
           </div>
-          <div *ngIf="!(downloadURL | async)">
+          <div  *ngIf="!(downloadURL | async)">
             <img
               src="/assets/human-and-dog.jpg"
               alt="Placeholder Human and Dog"
@@ -88,7 +91,7 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size-sm="6" offset-sm="3">
+          <ion-col size="12" size-sm="8" offset-sm="2">
             <ion-item>
               <ion-label color="primary" position="stacked"
                 >First Name</ion-label
