@@ -5,13 +5,18 @@ import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 
 import { AboutPageRoutingModule } from "./about-routing.module";
-
 import { AboutPage } from "./about.page";
-import { MapModalComponent } from "../shared/map-modal/map-modal.component";
+import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, AboutPageRoutingModule],
-  declarations: [AboutPage, MapModalComponent],
-  entryComponents: [MapModalComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    AboutPageRoutingModule,
+    SharedModule
+  ],
+  declarations: [AboutPage],
+  entryComponents: []
 })
 export class AboutPageModule {}
