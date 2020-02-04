@@ -29,6 +29,6 @@ npm-debug.log*
 /platforms
 /plugins
 /www
-environments/*
+/src/environments/*
 
 angular-ionic-pawwow-firebase-adminsdk-oj2l8-50ad06bcb6.json
