@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { ServicesPageRoutingModule } from './services-routing.module';
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
-import { ServicesPage } from './services.page';
-import { SharedModule } from '../shared/shared.module';
+import { ServicesPageRoutingModule } from "./services-routing.module";
+import { ServicesPage } from "./services.page";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     IonicModule,
     ServicesPageRoutingModule,
-    SharedModule
+    SharedModule,
+    Ng2SearchPipeModule
   ],
   declarations: [ServicesPage]
 })

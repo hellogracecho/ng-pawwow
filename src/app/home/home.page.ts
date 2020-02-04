@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { PageInfoDataService } from "../core/page-info-data.service";
+import { PageInfoDataService } from "../shared/page-info-data.service";
 
 @Component({
   selector: "app-home",

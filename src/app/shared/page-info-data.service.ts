@@ -24,6 +24,11 @@ export class PageInfoDataService {
       title: "Our Services",
       url: "/services",
       icon: "leaf"
+    },
+    {
+      title: "Your Account",
+      url: "/profile",
+      icon: "person"
     }
   ];
 
