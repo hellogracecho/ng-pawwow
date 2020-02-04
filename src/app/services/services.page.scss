@@ -1,0 +1,13 @@
+.service-card {
+  img {
+    max-height: 25vh;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  ion-card-title {
+    margin-bottom: 10px;
+  }
+  ion-card-subtitle {
+    margin-bottom: 4px;
+  }
+}

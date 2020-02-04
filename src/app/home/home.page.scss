@@ -1,5 +1,11 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
-  object-fit: cover;
+.welcome-card {
+  img {
+    max-height: 35vh;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  ion-card-header {
+    padding-bottom: 0;
+  }
 }
