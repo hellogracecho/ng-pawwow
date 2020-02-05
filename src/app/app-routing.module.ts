@@ -66,11 +66,6 @@ const routes: Routes = [
       import("./about/about.module").then(m => m.AboutPageModule)
   },
   {
-    path: "staff",
-    loadChildren: () =>
-      import("./staff/staff.module").then(m => m.StaffPageModule)
-  },
-  {
     path: "services",
     loadChildren: () =>
       import("./services/services.module").then(m => m.ServicesPageModule)
@@ -100,6 +95,10 @@ const routes: Routes = [
       import("./users/users.module").then(m => m.UsersPageModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly }
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
   }
 ];
 

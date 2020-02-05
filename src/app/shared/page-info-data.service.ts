@@ -11,19 +11,19 @@ export class PageInfoDataService {
       icon: "home"
     },
     {
-      title: "About",
+      title: "About Us",
       url: "/about",
       icon: "happy"
     },
     {
-      title: "Our Staff",
-      url: "/staff",
-      icon: "people"
-    },
-    {
       title: "Our Services",
       url: "/services",
-      icon: "leaf"
+      icon: "paw"
+    },
+    {
+      title: "Contact Us",
+      url: "/contact",
+      icon: "chatboxes"
     },
     {
       title: "My Account",
