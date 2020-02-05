@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AlertController } from "@ionic/angular";
 
 @Component({
   selector: "app-services",
@@ -34,7 +35,33 @@ export class ServicesPage implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(private alertCtrl: AlertController) {}
 
   ngOnInit() {}
+
+  onServiceCall() {
+    this.alertCtrl
+      .create({
+        header: "Title",
+        subHeader: "Sub-title",
+        message: "Description...",
+        buttons: [
+          {
+            text: "Cancel",
+            role: "cancel",
+            cssClass: "secondary",
+            handler: blah => {
+              console.log("Confirm Cancel: blah");
+            }
+          },
+          {
+            text: "Call",
+            handler: () => {
+              console.log("Confirm Okay");
+            }
+          }
+        ]
+      })
+      .then(alertEl => alertEl.present());
+  }
 }

@@ -3,15 +3,17 @@ ion-card:first-of-type {
 }
 
 .service-card {
+  height: 100%;
+
   img {
     max-height: 25vh;
     overflow: hidden;
     object-fit: cover;
   }
-  ion-card-title {
-    margin-bottom: 10px;
-  }
-  ion-card-subtitle {
-    margin-bottom: 4px;
-  }
+}
+
+.card-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
