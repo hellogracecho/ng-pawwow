@@ -47,10 +47,10 @@ export class ProfilePage implements OnInit {
     private afStorage: AngularFireStorage
   ) {
     this.uid = this.route.snapshot.paramMap.get("id");
-
     this.downloadURL = this.afStorage
       .ref(`users/${this.uid}/profile-image`)
       .getDownloadURL();
+    console.log(this.downloadURL);
   }
 
   ngOnInit() {
