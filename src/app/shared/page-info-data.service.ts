@@ -26,7 +26,7 @@ export class PageInfoDataService {
       icon: "leaf"
     },
     {
-      title: "Your Account",
+      title: "My Account",
       url: "/profile",
       icon: "person"
     }

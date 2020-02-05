@@ -23,7 +23,7 @@ export class AuthService {
     this.router.navigate(["auth"]);
   }
 
-  async isLoggedIn() {
+  isLoggedIn() {
     return !!this.afAuth.auth.currentUser;
   }
 
