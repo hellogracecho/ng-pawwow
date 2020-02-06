@@ -20,6 +20,9 @@ export class ContactPage implements OnInit {
   lat: number = 49.282508;
   lng: number = -123.108907;
 
+  phoneNumber = "6040000000";
+  emailAddress = "info@pawwow.ca";
+
   constructor(
     private http: HttpClient,
     private modalCtrl: ModalController,
@@ -72,21 +75,22 @@ export class ContactPage implements OnInit {
   }
 
   // Contact phone and email
-  // TODO: When "call" clicked -> actually call to the number
   onContactCall() {
     this.actionSheetCtrl
       .create({
         buttons: [
           {
-            text: "Call (604)-000-0000",
+            text: "Call " + this.formatPhoneNumber(this.phoneNumber),
             handler: () => {
-              console.log("Call clicked");
+              // TODO this tel link not woring..
+              window.open("tel:" + this.phoneNumber);
+              // window.location.href = "tel:" + this.phoneNumber;
             }
           },
           {
             text: "Copy",
             handler: () => {
-              console.log("Copy clicked");
+              this.copyToClipboard(this.phoneNumber);
             }
           },
           {
@@ -102,15 +106,14 @@ export class ContactPage implements OnInit {
   }
 
   onContactEmail() {
-    console.log("email clicked.");
-
     this.actionSheetCtrl
       .create({
         buttons: [
           {
-            text: "Email to info@pawwow.ca",
+            text: "Email to " + this.emailAddress,
             handler: () => {
-              console.log("Call clicked");
+              // TODO idea 1. modal controller
+              // TODO idea 2. simply... link to mailto: tag? like window.open("mailto:info@pawwow.ca") ?
               this.modalCtrl
                 .create({
                   component: EmailModalComponent
@@ -123,7 +126,7 @@ export class ContactPage implements OnInit {
           {
             text: "Copy",
             handler: () => {
-              console.log("Copy clicked");
+              this.copyToClipboard(this.emailAddress);
             }
           },
           {
@@ -136,5 +139,28 @@ export class ContactPage implements OnInit {
         ]
       })
       .then(alertEl => alertEl.present());
+  }
+
+  // Phone number expression to reformat
+  formatPhoneNumber(phoneNumberString) {
+    var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      var intlCode = match[1] ? "+1 " : "";
+      return [intlCode, "(", match[2], ") ", match[3], "-", match[4]].join("");
+    }
+    return null;
+  }
+
+  // Async Clipboard API
+  copyToClipboard(copyText) {
+    navigator.clipboard.writeText(copyText).then(
+      function() {
+        console.log("Async: Copying to clipboard was successful!");
+      },
+      function(err) {
+        console.error("Async: Could not copy text: ", err);
+      }
+    );
   }
 }

@@ -33,13 +33,13 @@
         </ion-text>
         <div class="contact-list">
           <ion-button (click)="onContactCall()">
-            <ion-icon slot="icon-only" name="call"></ion-icon>&nbsp;
-            <h4>(604)-000-0000</h4>
+            <ion-icon slot="icon-only" name="call"></ion-icon>
+            <h4>{{ formatPhoneNumber(phoneNumber) }}</h4>
           </ion-button>
 
           <ion-button expand="block" (click)="onContactEmail()">
-            <ion-icon slot="icon-only" name="mail"></ion-icon>&nbsp;
-            <h4>info@pawwow.ca</h4>
+            <ion-icon slot="icon-only" name="mail"></ion-icon>
+            <h4>{{ emailAddress }}</h4>
           </ion-button>
         </div>
       </ion-col>
