@@ -7,6 +7,7 @@ import { of } from "rxjs";
 import { environment } from "../../environments/environment";
 import { ModalController, ActionSheetController } from "@ionic/angular";
 import { MapModalComponent } from "../shared/map-modal/map-modal.component";
+import { EmailModalComponent } from "../shared/email-modal/email-modal.component";
 
 @Component({
   selector: "app-contact",
@@ -78,7 +79,6 @@ export class ContactPage implements OnInit {
         buttons: [
           {
             text: "Call (604)-000-0000",
-            icon: "phone",
             handler: () => {
               console.log("Call clicked");
             }
@@ -101,15 +101,40 @@ export class ContactPage implements OnInit {
       .then(alertEl => alertEl.present());
   }
 
-  // TODO: Modal Controller to write a email to "info@pawwow.ca" with the user's email
   onContactEmail() {
     console.log("email clicked.");
-    this.modalCtrl
+
+    this.actionSheetCtrl
       .create({
-        component: MapModalComponent
+        buttons: [
+          {
+            text: "Email to info@pawwow.ca",
+            handler: () => {
+              console.log("Call clicked");
+              this.modalCtrl
+                .create({
+                  component: EmailModalComponent
+                })
+                .then(modalEl => {
+                  modalEl.present();
+                });
+            }
+          },
+          {
+            text: "Copy",
+            handler: () => {
+              console.log("Copy clicked");
+            }
+          },
+          {
+            text: "Cancel",
+            role: "cancel",
+            handler: () => {
+              console.log("Cancel clicked");
+            }
+          }
+        ]
       })
-      .then(modalEl => {
-        modalEl.present();
-      });
+      .then(alertEl => alertEl.present());
   }
 }
