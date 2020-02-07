@@ -142,6 +142,7 @@ export class ContactPage implements OnInit {
   }
 
   // Phone number expression to reformat
+  // TODO Create a custom pipe .. ng c pipe someThing
   formatPhoneNumber(phoneNumberString) {
     var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
     var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);

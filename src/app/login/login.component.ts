@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         await resp.user.updateProfile({
           displayName: `${firstName} ${lastName}`
         });
-        await this.auth.createUserDocument();
+        await this.auth.createUserDocument(firstName, lastName);
       } else {
         if (form.valid) {
           this.loadingCtrl

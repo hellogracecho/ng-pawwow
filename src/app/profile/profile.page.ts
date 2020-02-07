@@ -114,6 +114,7 @@ export class ProfilePage implements OnInit {
           });
       } else {
         console.log("invalid form");
+        this.error = "Please fill out the form.";
         return;
       }
       await this.auth.updateUserDocument(userProfile);
@@ -127,6 +128,8 @@ export class ProfilePage implements OnInit {
 
   fileChange(event) {
     // ** When "cancel to upload", it still needs to display the current picture, so it can not return null.
+    // TODO: When updated, it displays the placeholder for a second while the URL is re-created..
+    // TODO isLoading...
     // this.downloadURL = null;
     this.error = null;
 
@@ -137,7 +140,6 @@ export class ProfilePage implements OnInit {
     const filePath = `users/${this.uid}/profile-image`;
     const fileRef = this.afStorage.ref(filePath);
 
-    // TODO: When updated, it displays the placeholder for a second while the URL is re-created..
     // upload and store the task
     const task = this.afStorage.upload(filePath, file);
     task.catch(error => (this.error = error.message));

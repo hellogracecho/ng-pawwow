@@ -10,3 +10,10 @@
 .map.visible {
   opacity: 1;
 }
+
+.button-get-direction {
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  z-index: 999;
+}

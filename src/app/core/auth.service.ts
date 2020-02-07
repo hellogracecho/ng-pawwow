@@ -24,18 +24,21 @@ export class AuthService {
   }
 
   isLoggedIn() {
+    // TODO /home page refresh... not catching the fireauth right awaw.
+    console.log(this.afAuth.auth.currentUser);
+    console.log(!!this.afAuth.auth.currentUser);
     return !!this.afAuth.auth.currentUser;
   }
 
-  createUserDocument() {
+  createUserDocument(firstname, lastname) {
     // get the current user
     const user = this.afAuth.auth.currentUser;
 
     // create the object with new data
     const userProfile: UserProfile = {
       uid: user.uid,
-      firstName: user.displayName.split(" ")[0],
-      lastName: user.displayName.split(" ")[1],
+      firstName: firstname,
+      lastName: lastname,
       email: user.email,
       phone: "",
       address: "",

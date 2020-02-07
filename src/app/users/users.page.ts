@@ -34,15 +34,13 @@ export class UsersPage implements OnInit {
     this.isLoading = true;
     // does user exist ?
     this.users.subscribe(val => {
+      this.isLoading = false;
       if (val.length > 0) {
         return (this.isUser = true);
       } else {
         return (this.isUser = false);
       }
     });
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
   }
 
   logout() {
