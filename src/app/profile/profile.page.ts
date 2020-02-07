@@ -14,8 +14,8 @@ import {
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFireStorage } from "@angular/fire/storage";
 
-import { AuthService } from "../core/auth.service";
-import { UserProfile } from "../core/user-profile.model";
+import { AuthService } from "../services/auth.service";
+import { UserProfile } from "../services/user-profile.model";
 
 @Component({
   selector: "app-profile",

@@ -25,8 +25,8 @@ export class AuthService {
 
   isLoggedIn() {
     // TODO /home page refresh... not catching the fireauth right awaw.
-    console.log(this.afAuth.auth.currentUser);
-    console.log(!!this.afAuth.auth.currentUser);
+    // console.log(this.afAuth.auth.currentUser);
+    // console.log(!!this.afAuth.auth.currentUser);
     return !!this.afAuth.auth.currentUser;
   }
 

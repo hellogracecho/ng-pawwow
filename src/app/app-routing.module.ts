@@ -68,7 +68,9 @@ const routes: Routes = [
   {
     path: "services",
     loadChildren: () =>
-      import("./services/services.module").then(m => m.ServicesPageModule)
+      import("./our-services/our-services.module").then(
+        m => m.ServicesPageModule
+      )
   },
   {
     path: "auth",
@@ -97,8 +99,9 @@ const routes: Routes = [
     data: { authGuardPipe: adminOnly }
   },
   {
-    path: 'contact',
-    loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
+    path: "contact",
+    loadChildren: () =>
+      import("./contact/contact.module").then(m => m.ContactPageModule)
   }
 ];
 

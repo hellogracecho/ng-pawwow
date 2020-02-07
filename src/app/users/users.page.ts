@@ -5,8 +5,8 @@ import {
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 
-import { UserProfile } from "../core/user-profile.model";
-import { AuthService } from "../core/auth.service";
+import { UserProfile } from "../services/user-profile.model";
+import { AuthService } from "../services/auth.service";
 import { LoadingController } from "@ionic/angular";
 
 @Component({

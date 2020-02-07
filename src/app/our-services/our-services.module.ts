@@ -6,8 +6,8 @@ import { IonicModule } from "@ionic/angular";
 
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 
-import { ServicesPageRoutingModule } from "./services-routing.module";
-import { ServicesPage } from "./services.page";
+import { ServicesPageRoutingModule } from "./our-services-routing.module";
+import { OurServicesPage } from "./our-services.page";
 import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
@@ -19,6 +19,6 @@ import { SharedModule } from "../shared/shared.module";
     SharedModule,
     Ng2SearchPipeModule
   ],
-  declarations: [ServicesPage]
+  declarations: [OurServicesPage]
 })
 export class ServicesPageModule {}

@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 
 @Component({
-  selector: "app-services",
-  templateUrl: "./services.page.html",
-  styleUrls: ["./services.page.scss"]
+  selector: "app-our-services",
+  templateUrl: "./our-services.page.html",
+  styleUrls: ["./our-services.page.scss"]
 })
-export class ServicesPage implements OnInit {
+export class OurServicesPage implements OnInit {
   services = [
     {
       title: "Dog Waliking",
