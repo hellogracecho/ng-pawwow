@@ -26,18 +26,42 @@
               </ion-text>
             </ion-col>
           </ion-row>
-          <div *ngIf="downloadURL | async; let srcUrl">
-            <img
-              [src]="srcUrl"
-              alt="profile image of {{ userProfile.firstName}}"
-            />
-          </div>
-          <div *ngIf="!(downloadURL | async)">
+
+          <div *ngIf="!(downloadURL | async) && !(currentDownloadURL | async)">
             <img
               src="/assets/human-and-dog.jpg"
               alt="Placeholder Human and Dog"
             />
           </div>
+
+          <div *ngIf="!isUpdated">
+            <div *ngIf="downloadURL | async; let srcUrl">
+              <img
+                [src]="srcUrl"
+                alt="profile image of {{ userProfile.firstName }}"
+              />
+            </div>
+          </div>
+
+          <div *ngIf="isUpdated">
+            <div *ngIf="isLoading">
+              <div *ngIf="currentDownloadURL | async; let srcUrl">
+                <img
+                  [src]="srcUrl"
+                  alt="profile image of {{ userProfile.firstName }}"
+                />
+              </div>
+            </div>
+            <div *ngIf="!isLoading">
+              <div *ngIf="downloadURL | async; let srcUrl">
+                <img
+                  [src]="srcUrl"
+                  alt="profile image of {{ userProfile.firstName }}"
+                />
+              </div>
+            </div>
+          </div>
+
           <span *ngIf="(uploadProgress | async)/100 ; let uploadValue">
             <ion-progress-bar
               *ngIf="! (uploadValue === 1 || uploadValue ===0)"

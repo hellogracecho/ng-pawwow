@@ -33,9 +33,12 @@ export class ProfilePage implements OnInit {
 
   error: string;
   isLoading = false;
+  isUpdated = false;
 
   // Upload photo and show the progress bar
   downloadURL: Observable<string>;
+  currentDownloadURL: Observable<string>;
+  // updatedDownloadURL: Observable<string>;
   uploadProgress: Observable<number>;
 
   constructor(
@@ -50,7 +53,6 @@ export class ProfilePage implements OnInit {
     this.downloadURL = this.afStorage
       .ref(`users/${this.uid}/profile-image`)
       .getDownloadURL();
-    console.log(this.downloadURL);
   }
 
   ngOnInit() {
@@ -109,7 +111,6 @@ export class ProfilePage implements OnInit {
             setTimeout(() => {
               this.isLoading = false;
               loadingEl.dismiss();
-              // this.auth.routeOnLogin();
             }, 1000);
           });
       } else {
@@ -130,8 +131,15 @@ export class ProfilePage implements OnInit {
     // ** When "cancel to upload", it still needs to display the current picture, so it can not return null.
     // TODO: When updated, it displays the placeholder for a second while the URL is re-created..
     // TODO isLoading...
-    // this.downloadURL = null;
+
+    this.isLoading = true;
+    this.isUpdated = true;
     this.error = null;
+
+    if (this.downloadURL) {
+      // Temporarily save the current image until it is updated
+      this.currentDownloadURL = this.downloadURL;
+    }
 
     // get the file
     const file = event.target.files[0];
@@ -152,6 +160,7 @@ export class ProfilePage implements OnInit {
       .snapshotChanges()
       .pipe(
         finalize(() => {
+          this.isLoading = false;
           this.downloadURL = fileRef.getDownloadURL();
         })
       )

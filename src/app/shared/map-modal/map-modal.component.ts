@@ -31,6 +31,12 @@ export class MapModalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  getDirection() {
+    window.open(
+      "https://www.google.com/maps/dir/49.2827125,-123.109105/151+W+Hastings+St,+Vancouver,+BC/@49.2826597,-123.111343,17z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x5486717994206c61:0x5625c9f83d97c055!2m2!1d-123.1088027!2d49.282578!3e3"
+    );
+  }
+
   ngAfterViewInit() {
     this.getGoogleMaps()
       .then(googleMaps => {
