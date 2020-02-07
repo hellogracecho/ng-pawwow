@@ -113,14 +113,15 @@ export class ContactPage implements OnInit {
             text: "Email to " + this.emailAddress,
             handler: () => {
               // TODO idea 1. modal controller
+              // this.modalCtrl
+              //   .create({
+              //     component: EmailModalComponent
+              //   })
+              //   .then(modalEl => {
+              //     modalEl.present();
+              //   });
               // TODO idea 2. simply... link to mailto: tag? like window.open("mailto:info@pawwow.ca") ?
-              this.modalCtrl
-                .create({
-                  component: EmailModalComponent
-                })
-                .then(modalEl => {
-                  modalEl.present();
-                });
+              window.open("mailto:" + this.emailAddress);
             }
           },
           {
