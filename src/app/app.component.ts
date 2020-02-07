@@ -4,7 +4,7 @@ import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
-import { PageInfoDataService } from "./shared/page-info-data.service";
+import { PageInfoDataService } from "./services/page-info-data.service";
 
 @Component({
   selector: "app-root",

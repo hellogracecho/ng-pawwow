@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { PageInfoDataService } from './page-info-data.service';
+import { PageInfoDataService } from "../services/page-info-data.service";
 
-describe('PageInfoDataService', () => {
+describe("PageInfoDataService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  it("should be created", () => {
     const service: PageInfoDataService = TestBed.get(PageInfoDataService);
     expect(service).toBeTruthy();
   });
