@@ -8,11 +8,13 @@ import { environment } from "../../environments/environment";
 import { ModalController, ActionSheetController } from "@ionic/angular";
 import { MapModalComponent } from "../shared/map-modal/map-modal.component";
 import { EmailModalComponent } from "../shared/email-modal/email-modal.component";
+import { PhoneFormatPipe } from "../shared/pipes/phone-format.pipe";
 
 @Component({
   selector: "app-contact",
   templateUrl: "./contact.page.html",
-  styleUrls: ["./contact.page.scss"]
+  styleUrls: ["./contact.page.scss"],
+  providers: [PhoneFormatPipe]
 })
 export class ContactPage implements OnInit {
   selectedLocationImage: string;
@@ -26,7 +28,8 @@ export class ContactPage implements OnInit {
   constructor(
     private http: HttpClient,
     private modalCtrl: ModalController,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private phoneFormat: PhoneFormatPipe
   ) {}
 
   ngOnInit() {
@@ -80,11 +83,11 @@ export class ContactPage implements OnInit {
       .create({
         buttons: [
           {
-            text: "Call " + this.formatPhoneNumber(this.phoneNumber),
+            text: "Call " + this.phoneFormat.transform(this.phoneNumber),
+            // ** Reference: to use custom pipe in a component class
+            // ** https://alligator.io/angular/using-pipes-in-component-class/
             handler: () => {
-              // TODO this tel link not woring..
               window.open("tel:" + this.phoneNumber);
-              // window.location.href = "tel:" + this.phoneNumber;
             }
           },
           {
@@ -140,18 +143,6 @@ export class ContactPage implements OnInit {
         ]
       })
       .then(alertEl => alertEl.present());
-  }
-
-  // Phone number expression to reformat
-  // TODO Create a custom pipe .. ng c pipe someThing
-  formatPhoneNumber(phoneNumberString) {
-    var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
-    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
-    if (match) {
-      var intlCode = match[1] ? "+1 " : "";
-      return [intlCode, "(", match[2], ") ", match[3], "-", match[4]].join("");
-    }
-    return null;
   }
 
   // Async Clipboard API

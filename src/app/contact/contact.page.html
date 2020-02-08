@@ -31,10 +31,11 @@
         <ion-text color="primary">
           <h1 class="heading-bold">Contact Number</h1>
         </ion-text>
+
         <div class="contact-list">
           <ion-button (click)="onContactCall()">
             <ion-icon slot="icon-only" name="call"></ion-icon>
-            <h4>{{ formatPhoneNumber(phoneNumber) }}</h4>
+            <h4>{{ phoneNumber | phoneFormat }}</h4>
           </ion-button>
 
           <ion-button expand="block" (click)="onContactEmail()">

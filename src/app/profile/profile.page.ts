@@ -8,7 +8,6 @@ import { LoadingController } from "@ionic/angular";
 
 import {
   AngularFirestoreDocument,
-  AngularFirestoreModule,
   AngularFirestore
 } from "@angular/fire/firestore";
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -160,10 +159,16 @@ export class ProfilePage implements OnInit {
       .snapshotChanges()
       .pipe(
         finalize(() => {
-          this.isLoading = false;
           this.downloadURL = fileRef.getDownloadURL();
         })
       )
       .subscribe();
+    this.isLoading = false;
+
+    // TODO: Android with Cordova File Chooser
+    // this.fileChooser
+    //   .open()
+    //   .then(uri => console.log(uri))
+    //   .catch(error => console.log(error));
   }
 }
