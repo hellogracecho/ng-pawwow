@@ -69,26 +69,21 @@
             ></ion-progress-bar>
           </span>
           <ion-card-header>
-            <ion-card-title color="secondary"
+            <ion-card-title text-center color="primary"
               >Hey, {{ userProfile.firstName }}
               <span *ngIf="userProfile.petName">
                 and {{ userProfile.petName }}
               </span>
             </ion-card-title>
           </ion-card-header>
+
           <ion-button
-            *ngIf="downloadURL | async; let srcUrl"
+            expand="block"
+            fill="outline"
             color="primary"
             (click)="fileInput.click()"
           >
-            Update Photo
-          </ion-button>
-          <ion-button
-            *ngIf="!(downloadURL | async)"
-            color="primary"
-            (click)="fileInput.click()"
-          >
-            Upload Photo
+            {{ (downloadURL | async) ? 'Update Photo' : 'Upload Photo'}}
           </ion-button>
           <input
             type="file"

@@ -52,6 +52,7 @@ export class ProfilePage implements OnInit {
     this.downloadURL = this.afStorage
       .ref(`users/${this.uid}/profile-image`)
       .getDownloadURL();
+    console.log(this.downloadURL);
   }
 
   ngOnInit() {
@@ -121,7 +122,7 @@ export class ProfilePage implements OnInit {
     } catch (error) {
       // TODO: this catch error not working..
       console.log("invalid form");
-      console.log(error.message);
+      // console.log(error.message);
       this.error = error.message;
     }
   }
