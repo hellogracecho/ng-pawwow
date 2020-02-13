@@ -7,10 +7,15 @@ import {
 } from "@angular/fire/firestore";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFireStorage } from "@angular/fire/storage";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 
-import { LoadingController, Platform } from "@ionic/angular";
+import {
+  LoadingController,
+  Platform,
+  ActionSheetController
+} from "@ionic/angular";
 
 import {
   Capacitor,
@@ -21,28 +26,6 @@ import {
 
 import { AuthService } from "../services/auth.service";
 import { UserProfile } from "../services/user-profile.model";
-
-// This function converts a string to a file
-function base64toBlob(base64Data, contentType) {
-  contentType = contentType || "";
-  const sliceSize = 1024;
-  const byteCharacters = atob(base64Data);
-  const bytesLength = byteCharacters.length;
-  const slicesCount = Math.ceil(bytesLength / sliceSize);
-  const byteArrays = new Array(slicesCount);
-
-  for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-    const begin = sliceIndex * sliceSize;
-    const end = Math.min(begin + sliceSize, bytesLength);
-
-    const bytes = new Array(end - begin);
-    for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
-      bytes[i] = byteCharacters[offset].charCodeAt(0);
-    }
-    byteArrays[sliceIndex] = new Uint8Array(bytes);
-  }
-  return new Blob(byteArrays, { type: contentType });
-}
 
 @Component({
   selector: "app-profile",
@@ -68,6 +51,7 @@ export class ProfilePage implements OnInit {
   isLoading = false;
   isUpdated = false;
   usePicker = false;
+  image: SafeResourceUrl;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -75,8 +59,10 @@ export class ProfilePage implements OnInit {
     private afs: AngularFirestore,
     private route: ActivatedRoute,
     private loadingCtrl: LoadingController,
+    private actionsheetCtrl: ActionSheetController,
     private afStorage: AngularFireStorage,
-    private platform: Platform
+    private platform: Platform,
+    private sanitizer: DomSanitizer
   ) {
     this.uid = this.route.snapshot.paramMap.get("id");
     this.downloadURL = this.afStorage
@@ -103,6 +89,86 @@ export class ProfilePage implements OnInit {
 
   logout() {
     this.auth.logout();
+  }
+
+  // TODO **** TEST ON MOBILE *** see if this works.. onPickImageWithCamera()
+  // TODO Currently, even though isPluginAvailable("Camera") is true,
+  // TODO ERROR Error: Uncaught (in promise): Requested device not found
+  onTest() {
+    // TODO if (!Capacitor.isPluginAvailable("Camera") || this.usePicker) {
+    if (!Capacitor.isPluginAvailable("Camera") && this.usePicker) {
+      // Camera plugins not available
+      this.filePickerRef.nativeElement.click();
+      return;
+    }
+    this.onPickImageWithCamera();
+  }
+
+  onPickImageWithCamera() {
+    this.actionsheetCtrl
+      .create({
+        buttons: [
+          {
+            text: "Take Photo",
+            handler: () => {
+              this.onTakePicture();
+            }
+          },
+          {
+            text: "Photo Library",
+            handler: () => {
+              this.getFromPhotoLibrary();
+            }
+          },
+          {
+            text: "Cancel",
+            role: "cancel"
+          }
+        ]
+      })
+      .then(alertEl => alertEl.present());
+  }
+
+  //Async Take Photo for onTest()
+  async onTakePicture() {
+    console.log("onTakePicture clicked");
+    const image = await Plugins.Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera
+    });
+    console.log(
+      "Got image back",
+      image.path,
+      image.webPath,
+      image.format,
+      image.exif
+    );
+    this.image = this.sanitizer.bypassSecurityTrustResourceUrl(
+      image && image.dataUrl
+    );
+  }
+
+  //Async Take photo from library for onTest()
+  async getFromPhotoLibrary() {
+    console.log("getFromPhotoLibrary clicked");
+    const image = await Plugins.Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos
+    });
+    console.log(
+      "Got image back",
+      image.path,
+      image.webPath,
+      image.format,
+      image.exif
+    );
+    this.image = this.sanitizer.bypassSecurityTrustResourceUrl(
+      image && image.dataUrl
+    );
   }
 
   // 1. Open Camera
@@ -149,7 +215,7 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  // 2. File Pick and Choose
+  // File Pick and Choose
   onFileChosen(event) {
     this.isLoading = true;
     this.isUpdated = true;
@@ -248,4 +314,26 @@ export class ProfilePage implements OnInit {
       this.error = error.message;
     }
   }
+}
+
+// This function converts a string to a file
+function base64toBlob(base64Data, contentType) {
+  contentType = contentType || "";
+  const sliceSize = 1024;
+  const byteCharacters = atob(base64Data);
+  const bytesLength = byteCharacters.length;
+  const slicesCount = Math.ceil(bytesLength / sliceSize);
+  const byteArrays = new Array(slicesCount);
+
+  for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+    const begin = sliceIndex * sliceSize;
+    const end = Math.min(begin + sliceSize, bytesLength);
+
+    const bytes = new Array(end - begin);
+    for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+      bytes[i] = byteCharacters[offset].charCodeAt(0);
+    }
+    byteArrays[sliceIndex] = new Uint8Array(bytes);
+  }
+  return new Blob(byteArrays, { type: contentType });
 }

@@ -85,6 +85,16 @@
           >
             {{ (downloadURL | async) ? 'Update Photo' : 'Upload Photo'}}
           </ion-button>
+          <!-- *** TEST ON MOBILE *** -->
+          <img *ngIf="image" [src]="image" />
+          <ion-button
+            expand="block"
+            fill="solid"
+            color="primary"
+            (click)="onTest()"
+            >TEST BUTTON</ion-button
+          >
+          <!-- *** END/TEST ON MOBILE *** -->
           <!-- Add file picker fallback + usePicker true/false on desktop -->
           <input
             type="file"
