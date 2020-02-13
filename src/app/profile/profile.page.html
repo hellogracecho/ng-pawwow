@@ -81,16 +81,17 @@
             expand="block"
             fill="outline"
             color="primary"
-            (click)="fileInput.click()"
+            (click)="onPickImage()"
           >
             {{ (downloadURL | async) ? 'Update Photo' : 'Upload Photo'}}
           </ion-button>
+          <!-- Add file picker fallback + usePicker true/false on desktop -->
           <input
             type="file"
-            class="file-input"
-            #fileInput
-            (change)="fileChange($event)"
             accept=".png,.jpg"
+            *ngIf="usePicker"
+            #filePicker
+            (change)="onFileChosen($event)"
           />
         </ion-card>
       </ion-col>
